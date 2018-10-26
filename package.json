@@ -17,6 +17,7 @@
     "react-katex": "^2.0.2"
   },
   "devDependencies": {
+    "eslint": "^5.7.0",
     "gh-pages": "^2.0.1"
   }
 }
