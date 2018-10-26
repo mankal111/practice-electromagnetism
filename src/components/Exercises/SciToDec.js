@@ -1,6 +1,7 @@
 import React from "react"
 import Exercise from "../Exercise"
 import JXRand from "jxrand"
+import * as math from 'mathjs'
 
 export default class SciToDec extends React.Component {
     constructor(props) {
@@ -25,12 +26,25 @@ export default class SciToDec extends React.Component {
         this.generateValues();
     }
 
+    generateSolutionArray() {
+        let solutionArray = [];
+        solutionArray.push([]);
+        for (let i = this.state.exponent; i != 0; i = this.state.exponent > 0 ? i - 1 : i + 1 ) {
+            solutionArray[0].push(`${math.eval(`${this.state.coefficient}*10^${this.state.exponent - i}`)}\\times10^{${i}}`);
+        }
+        solutionArray[0].push(`${math.eval(`${this.state.coefficient}*10^${this.state.exponent}`)}\\times10^0`);
+        solutionArray[0].push(`${math.eval(`${this.state.coefficient}*10^${this.state.exponent}`)}\\times1`);
+        solutionArray.push(`${math.eval(`${this.state.coefficient}*10^${this.state.exponent}`)}`);
+        return solutionArray;
+    }
+
     render() {
         return <Exercise 
             title="Convert Scientific to Decimal notation"
             description="Practice on converting Decimal to Scientific notation"
             question={`\\text{Write the number } ${this.state.coefficient}\\times10^{${this.state.exponent}} \\text{ in Decimal notation}`}
             answer={this.state.coefficient*Math.pow(10, this.state.exponent)}
+            solution={this.generateSolutionArray()}
             generateNewValues={this.generateValues}
         />;
     }

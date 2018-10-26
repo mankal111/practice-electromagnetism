@@ -1,14 +1,17 @@
 import React from "react"
 import 'katex/dist/katex.min.css'
 import {BlockMath} from "react-katex"
+import Solution from "./Solution";
 
 export default class Exercise extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {answerValue: ''};
+        this.state = {answerValue: '', solutionVisible: false};
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.toggleSolution = this.toggleSolution.bind(this);
+        this.newExercise = this.newExercise.bind(this);
     }
 
     handleChange(event) {
@@ -19,9 +22,18 @@ export default class Exercise extends React.Component {
         if (Number(this.state.answerValue) === this.props.answer) {
             alert("Correct!");
         } else {
-            alert(`Sorry... ${this.state.answerValue} is not the correct answer.`+this.props.answer)
+            alert(`Sorry... ${this.state.answerValue} is not the correct answer.`)
         }
         event.preventDefault();
+    }
+
+    toggleSolution() {
+        this.setState({solutionVisible: !this.state.solutionVisible})
+    }
+
+    newExercise() {
+        this.props.generateNewValues();
+        this.setState({solutionVisible: false});
     }
 
     render() {
@@ -36,7 +48,9 @@ export default class Exercise extends React.Component {
                 </label>
                 <input type="submit" value="Check" />
             </form>
-            <button onClick={this.props.generateNewValues}>New Exercise</button>
+            <button onClick={this.toggleSolution}>Solution</button>
+            <button onClick={this.newExercise}>New Exercise</button>
+            {this.state.solutionVisible && <Solution steps={this.props.solution}/>}
         </div>;
     }
 }
