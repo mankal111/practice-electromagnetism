@@ -16,7 +16,7 @@ export default class Exercise extends React.Component {
     }
 
     handleChange(event) {
-        this.setState({answerValue: event.target.value});
+        this.setState({ answerValue: event.target.value });
     }
 
     handleSubmit(event) {
@@ -29,12 +29,12 @@ export default class Exercise extends React.Component {
     }
 
     toggleSolution() {
-        this.setState({solutionVisible: !this.state.solutionVisible})
+        this.setState({ solutionVisible: !this.state.solutionVisible })
     }
 
     newExercise() {
         this.props.generateNewValues();
-        this.setState({solutionVisible: false});
+        this.setState({ answerValue: '', solutionVisible: false });
     }
 
     render() {
