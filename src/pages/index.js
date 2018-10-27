@@ -7,6 +7,6 @@ export default () => (
     <div className={indexStyles.main}>
         <h1>Electromagnetism exercises</h1>
         <SciToDec />
-        {/* <DecToSci /> */}
+        <DecToSci />
     </div>
 );
