@@ -2,6 +2,7 @@ import React from "react"
 import 'katex/dist/katex.min.css'
 import {BlockMath} from "react-katex"
 import Solution from "./Solution";
+import exerciseStyles from "./Exercise.module.css"
 
 export default class Exercise extends React.Component {
     constructor(props) {
@@ -37,19 +38,19 @@ export default class Exercise extends React.Component {
     }
 
     render() {
-        return <div>
-            <h2>{this.props.title}</h2>
+        return <div className={exerciseStyles.container}>
+            <h2 className={exerciseStyles.title}>{this.props.title}</h2>
             <div>{this.props.description}</div>
             <BlockMath math={this.props.question} />
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} className={exerciseStyles.form}>
                 <label>
                     Answer:
                     <input type="text" value={this.state.answerValue} onChange={this.handleChange} />
                 </label>
-                <input type="submit" value="Check" />
+                <input type="submit" value="Check" className={exerciseStyles.button} />
             </form>
-            <button onClick={this.toggleSolution}>Solution</button>
-            <button onClick={this.newExercise}>New Exercise</button>
+            <span className={exerciseStyles.button} onClick={this.toggleSolution}>Solution</span>
+            <span className={exerciseStyles.button} onClick={this.newExercise}>New Exercise</span>
             {this.state.solutionVisible && <Solution steps={this.props.solution}/>}
         </div>;
     }
