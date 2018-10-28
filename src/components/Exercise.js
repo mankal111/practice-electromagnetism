@@ -3,6 +3,7 @@ import 'katex/dist/katex.min.css'
 import {BlockMath, InlineMath} from "react-katex"
 import Solution from "./Solution";
 import exerciseStyles from "./Exercise.module.css"
+import * as math from 'mathjs'
 
 export default class Exercise extends React.Component {
     constructor(props) {
@@ -16,11 +17,11 @@ export default class Exercise extends React.Component {
     }
 
     handleChange(event) {
-        this.setState({ answerValue: event.target.value });
+        this.setState({ [event.target.name]: event.target.value });
     }
 
     handleSubmit(event) {
-        if (Number(this.state.answerValue) === this.props.answer) {
+        if (this.checkAnswer()) {
             alert("Correct!");
         } else {
             alert(`Sorry... ${this.state.answerValue} is not the correct answer.`)
@@ -32,24 +33,50 @@ export default class Exercise extends React.Component {
         this.setState({ solutionVisible: !this.state.solutionVisible })
     }
 
+    checkAnswer() {
+        for (let i = 0; i < this.props.answer.length; i++) {
+            let item = this.props.answer[i];
+            if (((item.type === "text") && (item.value !== Number(this.state[`${i}-value`]))) ||
+                (item.type === "scientific-notation") && (
+                    (item.exponent !== Number(this.state[`${i}-exponent`]) ||
+                    (!math.compare(item.coefficient, Number(this.state[`${i}-coefficient`])))
+                ))) {
+                    return false;
+            }
+        };
+        return true;
+    }
+
     newExercise() {
         this.props.generateNewValues();
         this.setState({ answerValue: '', solutionVisible: false });
     }
 
-    inputElement() {
-        if (this.props.inputType === "scientific-notation") {
+    inputElements() {
+        const i = 0;
+        if (this.props.answer[i].type === "scientific-notation") {
             return <span className={exerciseStyles["scientific-notation-container"]} >
-                <input type="number" className={exerciseStyles["coeficient"]} />
+                <input
+                    type="text"
+                    className={exerciseStyles["coefficient"]}
+                    onChange={this.handleChange}
+                    name={`${i}-coefficient`}
+                />
                 <InlineMath math="\times 10" />
-                <input type="number" className={exerciseStyles["exponent"]} />
+                <input
+                    type="text"
+                    className={exerciseStyles["exponent"]}
+                    onChange={this.handleChange}
+                    name={`${i}-exponent`}
+                />
             </span>
         } 
         return <input
             type="text"
-            value={this.state.answerValue}
+            value={this.state[`${i}-value`]}
             onChange={this.handleChange}
             className={exerciseStyles["decimal-input"]}
+            name={`${i}-value`}
         />
     }
 
@@ -60,7 +87,7 @@ export default class Exercise extends React.Component {
             <BlockMath math={this.props.question} />
             <div className={exerciseStyles["answer-section"]}>
                 <span>Answer: </span>
-                {this.inputElement()}
+                {this.inputElements()}
             </div>
             <span className={exerciseStyles.button} onClick={this.handleSubmit}>Check</span>
             <span className={exerciseStyles.button} onClick={this.toggleSolution}>Solution</span>
