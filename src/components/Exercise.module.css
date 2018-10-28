@@ -1,5 +1,7 @@
 
 .container {
+    display: flex;
+    flex-direction: column;
     margin: 3rem auto;
     max-width: 600px;
     color: #444444;
@@ -31,4 +33,25 @@
     -webkit-box-shadow: inset -1px -4px 33px -12px rgba(0,0,0,0.26);
     -moz-box-shadow: inset -1px -4px 33px -12px rgba(0,0,0,0.26);
     box-shadow: inset -1px -4px 33px -12px rgba(0,0,0,0.26);
+}
+
+.answer-section {
+    display: flex;
+    margin: 30px;
+}
+
+.scientific-notation-container {
+    width: 200px;
+}
+
+.coeficient {
+    width: 50px;
+}
+.exponent {
+    position: relative;
+    top: -10px;
+    width: 30px;
+}
+.decimal-input {
+    width: 50px;
 }
