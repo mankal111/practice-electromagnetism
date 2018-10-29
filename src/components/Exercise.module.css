@@ -52,6 +52,19 @@
     top: -10px;
     width: 30px;
 }
-.decimal-input {
+.decimal {
     width: 50px;
+}
+
+input {
+    border: 0;
+    border-bottom: 1px solid #999999;
+    text-align: center;
+    background: transparent;
+    color: #ff6600;
+}
+
+input:focus {
+    outline: 0;
+    border-bottom: 2px solid #ff6600;
 }
