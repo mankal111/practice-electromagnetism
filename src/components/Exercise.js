@@ -39,8 +39,8 @@ export default class Exercise extends React.Component {
             if (((item.type === "text") && (item.value !== Number(this.state[`${i}-value`]))) ||
                 (item.type === "scientific-notation") && (
                     (item.exponent !== Number(this.state[`${i}-exponent`]) ||
-                    (!math.compare(item.coefficient, Number(this.state[`${i}-coefficient`])))
-                ))) {
+                    (item.coefficient.toString() !== this.state[`${i}-coefficient`]))
+                )) {
                     return false;
             }
         };
