@@ -8,7 +8,7 @@ import * as math from 'mathjs'
 export default class Exercise extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {answerValue: '', solutionVisible: false};
+        this.state = {solutionVisible: false};
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -75,7 +75,7 @@ export default class Exercise extends React.Component {
             type="text"
             value={this.state[`${i}-value`]}
             onChange={this.handleChange}
-            className={exerciseStyles["decimal-input"]}
+            className={exerciseStyles["decimal"]}
             name={`${i}-value`}
         />
     }
