@@ -20,9 +20,14 @@ export default class DecToSci extends React.Component {
                 .toFixed(JXRand.getNumber({min: 0, max: 4, type: 'integer'}))),
             exponent: JXRand.getNumber({min: -6, max: 6, type: 'integer'})
         });
+        console.log(this.state.coefficient.toString(), this.state.exponent)
     }
 
     componentDidMount() {
+        math.config({
+            number: 'BigNumber',
+            precision: 64
+        })
         this.generateValues();
     }
 
@@ -30,10 +35,10 @@ export default class DecToSci extends React.Component {
         let solutionArray = [];
         solutionArray.push([]);
         for (let i = 0; i != this.state.exponent; i = this.state.exponent > 0 ? i + 1 : i - 1 ) {
-            solutionArray[0].push(`${math.eval(`${this.state.coefficient}*10^${this.state.exponent - i}`)}\\times10^{${i}}`);
+            solutionArray[0].push(`${math.eval(`${this.state.coefficient.toString()}*10^${this.state.exponent - i}`)}\\times10^{${i}}`);
         }
-        solutionArray[0].push(`${this.state.coefficient}\\times10^{${this.state.exponent}}`);
-        solutionArray.push(`${this.state.coefficient}\\times10^{${this.state.exponent}}`);
+        solutionArray[0].push(`${this.state.coefficient.toString()}\\times10^{${this.state.exponent}}`);
+        solutionArray.push(`${this.state.coefficient.toString()}\\times10^{${this.state.exponent}}`);
         return solutionArray;
     }
 
@@ -41,7 +46,7 @@ export default class DecToSci extends React.Component {
         return <Exercise 
             title="Convert Decimal to Scientific notation"
             description="Practice on converting Decimal to Scientific notation"
-            question={`\\text{Write the number } ${math.eval(`${this.state.coefficient}*10^${this.state.exponent}`)} \\text{ in Scientific notation}`}
+            question={`\\text{Write the number } ${math.eval(`${this.state.coefficient.toString()}*10^${this.state.exponent}`)} \\text{ in Scientific notation}`}
             answer={[{
                 type: "scientific-notation",
                 coefficient: this.state.coefficient,

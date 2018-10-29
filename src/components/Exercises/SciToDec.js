@@ -23,6 +23,10 @@ export default class SciToDec extends React.Component {
     }
 
     componentDidMount() {
+        math.config({
+            number: 'BigNumber',
+            precision: 64
+        })
         this.generateValues();
     }
 
