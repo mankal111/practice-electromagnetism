@@ -1,14 +1,13 @@
 import React from "react"
 import Exercise from "../Exercise"
-import JXRand from "jxrand"
 import * as math from 'mathjs'
+import {getRandomScientificNotationNumber} from "../../utils"
 
 export default class SciToDec extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            coefficient: 0,
-            exponent: 0
+            number: {coefficient: 0, exponent: 0}
         };
 
         this.generateValues = this.generateValues.bind(this);
@@ -16,9 +15,7 @@ export default class SciToDec extends React.Component {
 
     generateValues(event) {
         this.setState({
-            coefficient: JXRand.getNumber({min: 1, max: 9.999})
-                .toFixed(JXRand.getNumber({min: 0, max: 4, type: 'integer'})),
-            exponent: JXRand.getNumber({min: -6, max: 6, type: 'integer'})
+            number: getRandomScientificNotationNumber()
         });
     }
 
@@ -32,22 +29,24 @@ export default class SciToDec extends React.Component {
 
     generateSolutionArray() {
         let solutionArray = [];
+        const {coefficient, exponent} = this.state.number;
         solutionArray.push([]);
-        for (let i = this.state.exponent; i != 0; i = this.state.exponent > 0 ? i - 1 : i + 1 ) {
-            solutionArray[0].push(`${math.eval(`${this.state.coefficient}*10^${this.state.exponent - i}`)}\\times10^{${i}}`);
+        for (let i = exponent; i != 0; i = exponent > 0 ? i - 1 : i + 1 ) {
+            solutionArray[0].push(`${math.eval(`${coefficient}*10^${exponent - i}`)}\\times10^{${i}}`);
         }
-        solutionArray[0].push(`${math.eval(`${this.state.coefficient}*10^${this.state.exponent}`)}\\times10^0`);
-        solutionArray[0].push(`${math.eval(`${this.state.coefficient}*10^${this.state.exponent}`)}\\times1`);
-        solutionArray.push(`${math.eval(`${this.state.coefficient}*10^${this.state.exponent}`)}`);
+        solutionArray[0].push(`${math.eval(`${coefficient}*10^${exponent}`)}\\times10^0`);
+        solutionArray[0].push(`${math.eval(`${coefficient}*10^${exponent}`)}\\times1`);
+        solutionArray.push(`${math.eval(`${coefficient}*10^${exponent}`)}`);
         return solutionArray;
     }
 
     render() {
+        const {coefficient, exponent} = this.state.number;
         return <Exercise 
             title="Convert Scientific to Decimal notation"
             description="Practice on converting Scientific to Decimal notation"
-            question={`\\text{Write the number } ${this.state.coefficient}\\times10^{${this.state.exponent}} \\text{ in Decimal notation}`}
-            answer={[{type: "text", value: this.state.coefficient*Math.pow(10, this.state.exponent)}]}
+            question={`\\text{Write the number } ${coefficient}\\times10^{${exponent}} \\text{ in Decimal notation}`}
+            answer={[{type: "text", value: coefficient*Math.pow(10, exponent)}]}
             solution={this.generateSolutionArray()}
             generateNewValues={this.generateValues}
         />;
