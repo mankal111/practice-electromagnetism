@@ -51,6 +51,7 @@
     position: relative;
     top: -10px;
     width: 30px;
+    font-size: 15px;
 }
 .decimal {
     width: 50px;
@@ -60,6 +61,7 @@ input {
     border: 0;
     border-bottom: 1px solid #999999;
     text-align: center;
+    font-size: 18px;
     background: transparent;
     color: #ff6600;
 }
