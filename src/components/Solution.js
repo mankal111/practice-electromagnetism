@@ -14,18 +14,18 @@ export default class Solution extends React.Component {
         setInterval(() => { this.setState({animationIndex: this.state.animationIndex + 1}) }, 1000);
     }
 
-    stepComponent(content) {
+    stepComponent(content, index) {
         if (content.constructor === Array) {
-            return <BlockMath math={content[this.state.animationIndex % content.length]} />
+            return <BlockMath key={index} math={content[this.state.animationIndex % content.length]} />
         } else {
-            return <BlockMath math={content} />
+            return <BlockMath key={index} math={content} />
         }
     }
 
     render() {
         return <div>
             <h3>Solution:</h3>
-            {this.state.steps.map(step => this.stepComponent(step))}
+            {this.state.steps.map((step, i) => this.stepComponent(step, i))}
         </div>;
     }
 }
