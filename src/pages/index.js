@@ -1,14 +1,15 @@
 import React from "react"
-import SciToDec from "../components/Exercises/SciToDec"
-import DecToSci from "../components/Exercises/DecToSci"
-import SciAddition from "../components/Exercises/SciAddition"
+import { Link } from 'gatsby'
 import indexStyles from "./index.module.css"
 
 export default () => (
     <div className={indexStyles.main}>
         <h1>Electromagnetism exercises</h1>
-        <SciToDec />
-        <DecToSci />
-        <SciAddition />
+        <Link to="/algebra/">
+            Algebra
+        </Link>
+        <Link to="/scientific-notation/">
+            Scientific Notation
+        </Link>
     </div>
 );

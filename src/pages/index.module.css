@@ -5,3 +5,17 @@
     background-color: #ffffff;
     text-align: center;
 }
+
+a {
+    color: #ff6600;
+    text-decoration: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    backGround-color: #ffffff;
+    border-radius: 9px;
+    border: 1px solid #999999;
+    padding: 9px;
+    margin: 10px;
+    -webkit-box-shadow: inset -1px -4px 33px -12px rgba(0,0,0,0.26);
+    -moz-box-shadow: inset -1px -4px 33px -12px rgba(0,0,0,0.26);
+    box-shadow: inset -1px -4px 33px -12px rgba(0,0,0,0.26);
+}
