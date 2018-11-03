@@ -19,7 +19,7 @@ export default class OpProps extends React.Component {
             ['\\alpha+\\beta=\\beta+\\alpha', '\\alpha\\cdot \\beta=\\beta\\cdot \\alpha'],
             ['\\alpha+(\\beta+\\gamma)=(\\alpha+\\beta)+\\gamma', '\\alpha(\\beta\\gamma)=(\\alpha\\beta)\\gamma'],
             ['\\alpha+0=\\alpha', '\\alpha\\cdot 1=\\alpha'],
-            ['\\alpha+(-\\alpha)=0', '\\alpha\\cdot \\fr\\alphac{1}{\\alpha}=1, \\alpha\\neq0'],
+            ['\\alpha+(-\\alpha)=0', '\\alpha\\cdot \\frac{1}{\\alpha}=1, \\alpha\\neq0'],
             ['\\alpha(\\beta+\\gamma)=\\alpha\\cdot \\beta+\\alpha\\cdot \\gamma', '\\alpha(\\beta+\\gamma)=\\alpha\\cdot \\beta+\\alpha\\cdot \\gamma']
         ]
     }
