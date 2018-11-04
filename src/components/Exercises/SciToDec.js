@@ -46,7 +46,7 @@ export default class SciToDec extends React.Component {
             title="Convert Scientific to Decimal notation"
             description="Practice on converting Scientific to Decimal notation"
             question={`\\text{Write the number } ${coefficient}\\times10^{${exponent}} \\text{ in Decimal notation}`}
-            answer={[{type: "text", value: coefficient*Math.pow(10, exponent)}]}
+            answer={[{type: "text-input", value: coefficient*Math.pow(10, exponent)}]}
             solution={this.generateSolutionArray()}
             generateNewValues={this.generateValues}
         />;

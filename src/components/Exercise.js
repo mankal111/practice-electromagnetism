@@ -53,31 +53,43 @@ export default class Exercise extends React.Component {
     }
 
     inputElements() {
-        const i = 0;
-        if (this.props.answer[i].type === "scientific-notation") {
-            return <span className={exerciseStyles["scientific-notation-container"]} >
-                <input
+        return this.props.answer.map((answerComponent, i) => {
+            if (answerComponent.type === "scientific-notation") {
+                return <span
+                    className={exerciseStyles["scientific-notation-container"]}
+                    key={i}
+                >
+                    <input
+                        type="text"
+                        className={exerciseStyles["coefficient"]}
+                        onChange={this.handleChange}
+                        name={`${i}-coefficient`}
+                    />
+                    <InlineMath math="\times 10" />
+                    <input
+                        type="text"
+                        className={exerciseStyles["exponent"]}
+                        onChange={this.handleChange}
+                        name={`${i}-exponent`}
+                    />
+                </span>
+            } else if (answerComponent.type === "scientific-notation") {
+                return <input
                     type="text"
-                    className={exerciseStyles["coefficient"]}
+                    value={this.state[`${i}-value`]}
                     onChange={this.handleChange}
-                    name={`${i}-coefficient`}
+                    className={exerciseStyles["decimal"]}
+                    name={`${i}-value`}
+                    key={i}
                 />
-                <InlineMath math="\times 10" />
-                <input
-                    type="text"
-                    className={exerciseStyles["exponent"]}
-                    onChange={this.handleChange}
-                    name={`${i}-exponent`}
-                />
-            </span>
-        } 
-        return <input
-            type="text"
-            value={this.state[`${i}-value`]}
-            onChange={this.handleChange}
-            className={exerciseStyles["decimal"]}
-            name={`${i}-value`}
-        />
+            } else if (answerComponent.type === "select-correct") {
+                return <select key={i}>
+                    {answerComponent.items.map((item, i) => <option key={i} value={i}>{item}</option>)}
+                </select>
+            } else if (answerComponent.type === "text") {
+                return <InlineMath key={i} math={answerComponent.content} />
+            }
+        })
     }
 
     render() {

@@ -48,8 +48,22 @@ export default class OpProps extends React.Component {
             title="Basic operations properties"
             description="Practice on recognizing the basic operations properties"
             question={`\\text{Name the following property: } ${this.properties.formulas[this.state.property][this.state.operation]}`}
-            answer={[{
-            }]}
+            answer={[
+                {
+                    type: "select-correct",
+                    items: this.properties.properties,
+                    correct: this.state.property
+                },
+                {
+                    type: "text",
+                    content: "\\text{property}"
+                },
+                {
+                    type: "select-correct",
+                    items: this.properties.operations,
+                    correct: this.state.operation
+                }
+            ]}
             generateNewValues={this.generateValues}
         />;
     }
