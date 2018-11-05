@@ -3,7 +3,6 @@ import 'katex/dist/katex.min.css'
 import {BlockMath, InlineMath} from "react-katex"
 import Solution from "./Solution";
 import exerciseStyles from "./Exercise.module.css"
-import * as math from 'mathjs'
 
 export default class Exercise extends React.Component {
     constructor(props) {
@@ -22,7 +21,9 @@ export default class Exercise extends React.Component {
 
     handleSubmit(event) {
         if (this.checkAnswer()) {
-            alert("Correct!");
+            if (window.confirm("Correct!\nDo you want to try this exercise with new values?")) {
+                this.newExercise();
+            };
         } else {
             alert(`Sorry... ${this.state.answerValue} is not the correct answer.`)
         }
