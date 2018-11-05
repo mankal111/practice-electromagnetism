@@ -36,11 +36,12 @@ export default class Exercise extends React.Component {
     checkAnswer() {
         for (let i = 0; i < this.props.answer.length; i++) {
             let item = this.props.answer[i];
-            if (((item.type === "text") && (item.value !== Number(this.state[`${i}-value`]))) ||
-                (item.type === "scientific-notation") && (
+            if (((item.type === "text-input") && (item.value !== Number(this.state[`${i}-value`]))) ||
+                ((item.type === "scientific-notation") && (
                     (item.exponent !== Number(this.state[`${i}-exponent`]) ||
                     (item.coefficient.toString() !== this.state[`${i}-coefficient`]))
-                )) {
+                )) || 
+                ((item.type === "select-correct") && (item.correct !== Number(this.state[`${i}-selected-item`])))) {
                     return false;
             }
         };
@@ -49,7 +50,8 @@ export default class Exercise extends React.Component {
 
     newExercise() {
         this.props.generateNewValues();
-        this.setState({ answerValue: '', solutionVisible: false });
+        this.resetInputFields();
+        this.setState({ solutionVisible: false });
     }
 
     inputElements() {
@@ -73,7 +75,7 @@ export default class Exercise extends React.Component {
                         name={`${i}-exponent`}
                     />
                 </span>
-            } else if (answerComponent.type === "scientific-notation") {
+            } else if (answerComponent.type === "text-input") {
                 return <input
                     type="text"
                     value={this.state[`${i}-value`]}
@@ -83,13 +85,37 @@ export default class Exercise extends React.Component {
                     key={i}
                 />
             } else if (answerComponent.type === "select-correct") {
-                return <select key={i}>
+                return <select 
+                    key={i}
+                    onChange={this.handleChange}
+                    name={`${i}-selected-item`}
+                    value={this.state[`${i}-selected-item`]}
+                >
                     {answerComponent.items.map((item, i) => <option key={i} value={i}>{item}</option>)}
                 </select>
             } else if (answerComponent.type === "text") {
                 return <InlineMath key={i} math={answerComponent.content} />
             }
         })
+    }
+
+    resetInputFields() {
+        this.props.answer.forEach((answerComponent, i) => {
+            if (answerComponent.type === "scientific-notation") {
+                this.setState({
+                    [`${i}-coefficient`]: '',
+                    [`${i}-exponent`]: '' 
+                });
+            } else if (answerComponent.type === "text-input") {
+                this.setState({[`${i}-value`]: ''});
+            } else if (answerComponent.type === "select-correct") {
+                this.setState({[`${i}-selected-item`]: 0});
+            }
+        })
+    }
+
+    componentWillMount() {
+        this.resetInputFields();
     }
 
     render() {
