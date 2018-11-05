@@ -128,7 +128,7 @@ export default class Exercise extends React.Component {
                 {this.inputElements()}
             </div>
             <span className={exerciseStyles.button} onClick={this.handleSubmit}>Check</span>
-            <span className={exerciseStyles.button} onClick={this.toggleSolution}>Solution</span>
+            {this.props.solution && <span className={exerciseStyles.button} onClick={this.toggleSolution}>Solution</span>}
             <span className={exerciseStyles.button} onClick={this.newExercise}>New Exercise</span>
             {this.state.solutionVisible && <Solution steps={this.props.solution}/>}
         </div>;
