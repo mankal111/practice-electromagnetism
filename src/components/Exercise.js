@@ -66,6 +66,7 @@ export default class Exercise extends React.Component {
                         type="text"
                         className={exerciseStyles["coefficient"]}
                         onChange={this.handleChange}
+                        value={this.state[`${i}-coefficient`]}
                         name={`${i}-coefficient`}
                     />
                     <InlineMath math="\times 10" />
@@ -73,6 +74,7 @@ export default class Exercise extends React.Component {
                         type="text"
                         className={exerciseStyles["exponent"]}
                         onChange={this.handleChange}
+                        value={this.state[`${i}-exponent`]}
                         name={`${i}-exponent`}
                     />
                 </span>
