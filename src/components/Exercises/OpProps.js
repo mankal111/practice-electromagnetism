@@ -56,7 +56,7 @@ export default class OpProps extends React.Component {
                 },
                 {
                     type: "text",
-                    content: "\\text{property}"
+                    content: "\\text{ property }"
                 },
                 {
                     type: "select-correct",

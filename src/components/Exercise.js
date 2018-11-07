@@ -127,7 +127,6 @@ export default class Exercise extends React.Component {
             <div>{this.props.description}</div>
             <BlockMath math={this.props.question} />
             <div className={exerciseStyles["answer-section"]}>
-                <span>Answer: </span>
                 {this.inputElements()}
             </div>
             <span className={exerciseStyles.button} onClick={this.handleSubmit}>Check</span>
