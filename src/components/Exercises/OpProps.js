@@ -61,7 +61,7 @@ export default class OpProps extends React.Component {
                 {
                     type: "select-correct",
                     items: this.properties.operations,
-                    correct: this.state.operation
+                    correct: this.state.property !== 4 ? this.state.operation : undefined
                 }
             ]}
             generateNewValues={this.generateValues}

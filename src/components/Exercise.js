@@ -37,13 +37,15 @@ export default class Exercise extends React.Component {
     checkAnswer() {
         for (let i = 0; i < this.props.answer.length; i++) {
             let item = this.props.answer[i];
-            if (((item.type === "text-input") && (item.value !== Number(this.state[`${i}-value`]))) ||
-                ((item.type === "scientific-notation") && (
-                    (item.exponent !== Number(this.state[`${i}-exponent`]) ||
-                    (item.coefficient.toString() !== this.state[`${i}-coefficient`]))
-                )) || 
-                ((item.type === "select-correct") && (item.correct !== Number(this.state[`${i}-selected-item`])))) {
-                    return false;
+            if (typeof item.correct !== 'undefined') {
+                if (((item.type === "text-input") && (item.value !== Number(this.state[`${i}-value`]))) ||
+                    ((item.type === "scientific-notation") && (
+                        (item.exponent !== Number(this.state[`${i}-exponent`]) ||
+                        (item.coefficient.toString() !== this.state[`${i}-coefficient`]))
+                    )) || 
+                    ((item.type === "select-correct") && (item.correct !== Number(this.state[`${i}-selected-item`])))) {
+                        return false;
+                }
             }
         };
         return true;
@@ -88,14 +90,14 @@ export default class Exercise extends React.Component {
                     key={i}
                 />
             } else if (answerComponent.type === "select-correct") {
-                return <select 
+                return typeof answerComponent.correct !== 'undefined' ? <select 
                     key={i}
                     onChange={this.handleChange}
                     name={`${i}-selected-item`}
                     value={this.state[`${i}-selected-item`]}
                 >
                     {answerComponent.items.map((item, i) => <option key={i} value={i}>{item}</option>)}
-                </select>
+                </select> : null;
             } else if (answerComponent.type === "text") {
                 return <InlineMath key={i} math={answerComponent.content} />
             }
@@ -122,6 +124,7 @@ export default class Exercise extends React.Component {
     }
 
     render() {
+        console.log(this.state, this.props.answer)
         return <div className={exerciseStyles.container}>
             <h2 className={exerciseStyles.title}>{this.props.title}</h2>
             <div>{this.props.description}</div>
