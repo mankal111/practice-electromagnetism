@@ -1,6 +1,6 @@
 {
-  "name": "practice-electromagnetism",
-  "description": "A collection of electromagnetism exercises",
+  "name": "practice-mathematics",
+  "description": "A collection of mathematics exercises",
   "license": "MIT",
   "scripts": {
     "develop": "gatsby develop",

@@ -1,6 +1,6 @@
-# Practice electromagnetism
+# Practice mathematics
 
-A collection of electromagnetism exercises
+A collection of mathematics exercises
 
 ## Running in development
 `gatsby develop`
