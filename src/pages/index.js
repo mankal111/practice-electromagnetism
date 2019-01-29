@@ -4,9 +4,12 @@ import indexStyles from "./index.module.css"
 
 export default () => (
     <div className={indexStyles.main}>
-        <h1>Electromagnetism exercises</h1>
+        <h1>Mathematics exercises</h1>
         <Link to="/algebra/">
             Algebra
+        </Link>
+        <Link to="/probabilities/">
+            Probabilities
         </Link>
         <Link to="/scientific-notation/">
             Scientific Notation
