@@ -1,4 +1,5 @@
 import React from "react"
+import SampleSpace from '../components/Exercises/SampleSpace'
 import indexStyles from "./index.module.css"
 import { Link } from 'gatsby'
 
@@ -8,5 +9,6 @@ export default () => (
         <Link to="/">
             Back to main page
         </Link>
+        <SampleSpace />
     </div>
 );
