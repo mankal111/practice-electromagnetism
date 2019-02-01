@@ -27,7 +27,7 @@ export default class SampleSpace extends React.Component {
                 answer: ['H', 'T'],
             },
         ]
-        this.setState(questionList[JXRand.getNumber({min: 0, max: questionList.length, type: 'integer'})]);
+        this.setState(JXRand.getRandomElement(questionList));
     }
 
     componentDidMount() {
