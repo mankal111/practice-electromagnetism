@@ -20,12 +20,13 @@ export default class Exercise extends React.Component {
     }
 
     handleSubmit(event) {
-        if (this.props.checkAnswer(this.state['0-value'])) {
+        const checkAnswerObject = this.props.checkAnswer(this.state['0-value']);
+        if (checkAnswerObject.isCorrect) {
             if (window.confirm("Correct!\nDo you want to try this exercise with new values?")) {
                 this.newExercise();
             };
         } else {
-            alert(`Sorry... ${this.state.answerValue} is not the correct answer.`)
+            alert(checkAnswerObject.message);
         }
         event.preventDefault();
     }
@@ -129,6 +130,7 @@ export default class Exercise extends React.Component {
             <h2 className={exerciseStyles.title}>{this.props.title}</h2>
             <div>{this.props.description}</div>
             <BlockMath math={this.props.question} />
+            <div>{this.props.answerComment}</div>
             <div className={exerciseStyles["answer-section"]}>
                 {this.inputElements()}
             </div>

@@ -36,15 +36,31 @@ export default class SampleSpace extends React.Component {
     }
 
     checkAnswer(answer) {
-        const answerArray = answer.replace(/\s+/g, '').split(',');
-        const answerSet = new Set(answerArray);
+        const answerArray = answer.replace(/\s+/g, '').split(',').filter(item => item !== '');
         const correctAnswerSet = this.state.answer;
-        if (answerArray.length !== correctAnswerSet.size) {
-            return false;
-        } else if (answerArray.filter(value => !correctAnswerSet.has(value)).length === 0) {
-            return true;
+        const wrongOutcomesArray = answerArray.filter(value => !correctAnswerSet.has(value));
+        if (wrongOutcomesArray.length > 0) {
+            return { 
+                isCorrect: false,
+                message: `Wrong... ${wrongOutcomesArray[0]} is not a possible outcome.`,
+            };
+        } else if (answerArray.length < correctAnswerSet.size) {
+            return { 
+                isCorrect: false,
+                message: 'Wrong... You didn\'t find all possible outcomes.',
+            };
+        } else if (answerArray.length > correctAnswerSet.size) {
+            return { 
+                isCorrect: false,
+                message: 'Wrong... The Sample Space should not have dublicates.',
+            };
+        } else if (wrongOutcomesArray.length === 0) {
+            return {isCorrect: true};
         } else {
-            return false;
+            return { 
+                isCorrect: false,
+                message: 'Wrong...',
+            };
         }
     }
 
@@ -54,6 +70,7 @@ export default class SampleSpace extends React.Component {
             description="Given a random experiment find the space that describes all the possible outcomes."
             question={`\\text{${this.state.question}}`}
             answerFields={[{type: "text-input"}]}
+            answerComment={this.state.answerComment}
             checkAnswer={this.checkAnswer}
             generateNewValues={this.generateValues}
         />;
