@@ -20,7 +20,7 @@ export default class Exercise extends React.Component {
     }
 
     handleSubmit(event) {
-        if (this.checkAnswer()) {
+        if (this.props.checkAnswer(this.state['0-value'])) {
             if (window.confirm("Correct!\nDo you want to try this exercise with new values?")) {
                 this.newExercise();
             };
@@ -35,8 +35,8 @@ export default class Exercise extends React.Component {
     }
 
     checkAnswer() {
-        for (let i = 0; i < this.props.answer.length; i++) {
-            let item = this.props.answer[i];
+        for (let i = 0; i < this.props.answerFields.length; i++) {
+            let item = this.props.answerFields[i];
             if (typeof item.correct !== 'undefined') {
                 if (((item.type === "text-input") && (item.value !== Number(this.state[`${i}-value`]))) ||
                     ((item.type === "scientific-notation") && (
@@ -58,7 +58,7 @@ export default class Exercise extends React.Component {
     }
 
     inputElements() {
-        return this.props.answer.map((answerComponent, i) => {
+        return this.props.answerFields.map((answerComponent, i) => {
             if (answerComponent.type === "scientific-notation") {
                 return <span
                     className={exerciseStyles["scientific-notation-container"]}
@@ -105,7 +105,7 @@ export default class Exercise extends React.Component {
     }
 
     resetInputFields() {
-        this.props.answer.forEach((answerComponent, i) => {
+        this.props.answerFields.forEach((answerComponent, i) => {
             if (answerComponent.type === "scientific-notation") {
                 this.setState({
                     [`${i}-coefficient`]: '',
@@ -124,7 +124,7 @@ export default class Exercise extends React.Component {
     }
 
     render() {
-        console.log(this.state, this.props.answer)
+        console.log(this.state, this.props)
         return <div className={exerciseStyles.container}>
             <h2 className={exerciseStyles.title}>{this.props.title}</h2>
             <div>{this.props.description}</div>
