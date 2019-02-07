@@ -129,8 +129,12 @@ export default class Exercise extends React.Component {
         return <div className={exerciseStyles.container}>
             <h2 className={exerciseStyles.title}>{this.props.title}</h2>
             <div>{this.props.description}</div>
-            <BlockMath math={this.props.question} />
-            <div>{this.props.answerComment}</div>
+            <div>
+                {this.props.question.map(item => <BlockMath math={item} />)}
+            </div>
+            <div>
+                {this.props.answerComment.map((item, i) => <div key={i}>{item}</div>)}
+            </div>
             <div className={exerciseStyles["answer-section"]}>
                 {this.inputElements()}
             </div>
