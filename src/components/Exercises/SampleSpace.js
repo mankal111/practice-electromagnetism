@@ -67,7 +67,8 @@ export default class SampleSpace extends React.Component {
                 question:
                     [
                         "A box has one red, one green and one blue ball.",
-                        "What is the Sample Space of picking up a ball, put it back and then pick another one?",
+                        "What is the Sample Space of picking up a ball,",
+                        "put it back and then pick another one up?",
                     ],
                 answerComment: [
                         "Write 'BG' to express the outcome of picking one blue and then one green.",
