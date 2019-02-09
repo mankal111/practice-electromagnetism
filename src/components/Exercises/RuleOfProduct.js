@@ -29,34 +29,41 @@ export default class RuleOfProduct extends React.Component {
                     { name: 'numberOfLetters', type: { min: 1, max: 3, type: 'integer' } },
                     { name: 'numberOfDigits', type: { min: 1, max: 5, type: 'integer' } },
                 ],
-                answer: (rangeOfLetters, numberOfLetters, numberOfDigits) => {
-                    return (Math.pow(rangeOfLetters, numberOfLetters) * Math.pow(10, numberOfDigits));
+                answer: (randomVariables) => {
+                    return (Math.pow(randomVariables.rangeOfLetters, randomVariables.numberOfLetters) * Math.pow(10, randomVariables.numberOfDigits));
                 }
             },
             {
-                questionId: 'car',
-                question: [
-                    "The seats of a theater are numbered by the letter A, B or C,",
-                    "followed by 3 digits. How many seats can we number that way?",
+                questionId: 'carPlate',
+                question: (randomVariables) => [
+                    `The car plates of a city are coded by ${randomVariables.numberOfCharacters} characters.`,
+                    `The ${randomVariables.numberOfLetters} of them are letters (26 different letters),`,
+                    `and the rest are digits. How many car plates can we number that way?`,
                 ],
-                answer: 3000,
+                randomVariables: [
+                    { name: 'numberOfCharacters', type: { min: 4, max: 6, type: 'integer' } },
+                    { name: 'numberOfLetters', type: { min: 2, max: 3, type: 'integer' } },
+                ],
+                answer: (randomVariables) => {
+                    return (Math.pow(26, randomVariables.numberOfLetters) * Math.pow(10, randomVariables.numberOfCharacters - randomVariables.numberOfLetters));
+                }
             },
         ]
 
-        // var newQuestion;
-        // do {
-        //     newQuestion = JXRand.getRandomElement(questionList);
-        // } while (newQuestion.questionId === this.state.questionId);
-        const randomVariables = questionList[0]
+        var newQuestion;
+        do {
+            newQuestion = JXRand.getRandomElement(questionList);
+        } while (newQuestion.questionId === this.state.questionId);
+        const randomVariables = newQuestion
             .randomVariables
             .reduce((result, item) => {
                     result[item.name] = JXRand.getNumber(item.type);
                     return result;
                 },
             {});
-        const renderedQuestion = questionList[0].question(randomVariables);
+        const renderedQuestion = newQuestion.question(randomVariables);
 
-        this.setState({question: renderedQuestion, answer: questionList[0].answer(randomVariables[0], randomVariables[1], randomVariables[2])});
+        this.setState({question: renderedQuestion, answer: newQuestion.answer(randomVariables), questionId: newQuestion.questionId });
     }
 
     componentDidMount() {
