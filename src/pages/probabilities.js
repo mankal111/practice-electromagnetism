@@ -1,5 +1,6 @@
 import React from "react"
 import SampleSpace from '../components/Exercises/SampleSpace'
+import RuleOfProduct from '../components/Exercises/RuleOfProduct'
 import indexStyles from "./index.module.css"
 import { Link } from 'gatsby'
 
@@ -10,5 +11,6 @@ export default () => (
             Back to main page
         </Link>
         <SampleSpace />
+        <RuleOfProduct />
     </div>
 );
