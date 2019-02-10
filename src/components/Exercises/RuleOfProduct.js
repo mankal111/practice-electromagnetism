@@ -37,15 +37,31 @@ export default class RuleOfProduct extends React.Component {
                 questionId: 'carPlate',
                 question: (randomVariables) => [
                     `The car plates of a city are coded by ${randomVariables.numberOfCharacters} characters.`,
-                    `The ${randomVariables.numberOfLetters} of them are letters (26 different letters),`,
-                    `and the rest are digits. How many car plates can we number that way?`,
+                    `The ${randomVariables.numberOfLetters === 1 ? 'one is letter' : `${randomVariables.numberOfLetters} are letters`} (26 different letters) and the rest are digits.`,
+                    `How many car plates can we number that way?`,
                 ],
                 randomVariables: [
                     { name: 'numberOfCharacters', type: { min: 4, max: 6, type: 'integer' } },
-                    { name: 'numberOfLetters', type: { min: 2, max: 3, type: 'integer' } },
+                    { name: 'numberOfLetters', type: { min: 1, max: 3, type: 'integer' } },
                 ],
                 answer: (randomVariables) => {
                     return (Math.pow(26, randomVariables.numberOfLetters) * Math.pow(10, randomVariables.numberOfCharacters - randomVariables.numberOfLetters));
+                }
+            },
+            {
+                questionId: 'balls',
+                question: (randomVariables) => [
+                    `A factory can create balls colored in ${randomVariables.numberOfColors} different colors, .`,
+                    `in ${randomVariables.numberOfSizes} different sizes and made of ${randomVariables.numberOfMaterials} different materials.`,
+                    `How many different balls can the factory create?`,
+                ],
+                randomVariables: [
+                    { name: 'numberOfColors', type: { min: 2, max: 6, type: 'integer' } },
+                    { name: 'numberOfSizes', type: { min: 2, max: 4, type: 'integer' } },
+                    { name: 'numberOfMaterials', type: { min: 2, max: 4, type: 'integer' } },
+                ],
+                answer: (randomVariables) => {
+                    return (randomVariables.numberOfColors * randomVariables.numberOfSizes * randomVariables.numberOfMaterials);
                 }
             },
         ]
