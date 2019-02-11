@@ -70,13 +70,7 @@ export default class RuleOfProduct extends React.Component {
         do {
             newQuestion = JXRand.getRandomElement(questionList);
         } while (newQuestion.questionId === this.state.questionId);
-        const randomVariables = newQuestion
-            .randomVariables
-            .reduce((result, item) => {
-                    result[item.name] = JXRand.getNumber(item.type);
-                    return result;
-                },
-            {});
+        const randomVariables = JXRand.getRandomValuesObject(newQuestion.randomVariables);
         const renderedQuestion = newQuestion.question(randomVariables);
 
         this.setState({question: renderedQuestion, answer: newQuestion.answer(randomVariables), questionId: newQuestion.questionId });
