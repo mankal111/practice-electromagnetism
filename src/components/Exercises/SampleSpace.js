@@ -1,6 +1,6 @@
 import React from "react"
 import JXRand from 'jxrand'
-import Exercise from "../Exercise"
+import { Exercise } from "react-exercise-component"
 
 export default class SampleSpace extends React.Component {
     constructor(props) {

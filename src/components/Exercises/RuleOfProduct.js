@@ -1,6 +1,6 @@
 import React from "react"
 import JXRand from 'jxrand'
-import Exercise from "../Exercise"
+import { Exercise } from "react-exercise-component"
 
 export default class RuleOfProduct extends React.Component {
     constructor(props) {
@@ -82,7 +82,7 @@ export default class RuleOfProduct extends React.Component {
 
     checkAnswer(answer) {
         const correctAnswer = this.state.answer;
-        if (correctAnswer === Number(answer)) {
+        if (correctAnswer === Number(answer.answer)) {
             return {
                 isCorrect: true,
             }
@@ -99,7 +99,7 @@ export default class RuleOfProduct extends React.Component {
             title="Rule of Product"
             description="Find the number of different combinations using the rule of product."
             question={this.state.question.map(item => `\\text{${item}}`)}
-            answerFields={[{type: "text-input"}]}
+            answerFields={[{type: "text-input", id: "answer"}]}
             answerComment={this.state.answerComment}
             checkAnswer={this.checkAnswer}
             generateNewValues={this.generateValues}
