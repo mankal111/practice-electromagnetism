@@ -1,5 +1,5 @@
 import React from "react"
-import Exercise from "../Exercise"
+import { Exercise } from "react-exercise-component"
 import JXRand from 'jxrand'
 import * as math from 'mathjs'
 

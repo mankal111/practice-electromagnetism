@@ -1,5 +1,5 @@
 import React from "react"
-import Exercise from "../Exercise"
+import { Exercise } from "react-exercise-component"
 import * as math from 'mathjs'
 import {getRandomScientificNotationNumber} from "../../utils"
 
