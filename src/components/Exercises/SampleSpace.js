@@ -6,7 +6,7 @@ export default class SampleSpace extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            question: [],
+            question: '',
             answerComment: [],
             answer: {},
             questionId: '',
@@ -20,19 +20,19 @@ export default class SampleSpace extends React.Component {
         const questionList = [
             {
                 questionId: 'die',
-                question: ["What is the Sample Space of throwing a die (6 faces)?"],
+                question: "What is the Sample Space of throwing a die (6 faces)?",
                 answerComment: ["Write the numbers of the faces separated by ','."],
                 answer: new Set(['1', '2', '3', '4', '5', '6']),
             },
             {
                 questionId: 'coins',
-                question: ["What is the Sample Space of throwing a coin?"],
+                question: "What is the Sample Space of throwing a coin?",
                 answerComment: ["Write 'H' for heads and 'T' for tails separated by ','."],
                 answer: new Set(['H', 'T']),
             },
             {
                 questionId: '2coins',
-                question: ["What is the Sample Space of throwing two coins?"],
+                question: "What is the Sample Space of throwing two coins?",
                 answerComment: [
                     "Write 'HT' to express the outcome coin1: heads and coin2: tails.",
                     "Separate the outcomes by ','."
@@ -41,21 +41,13 @@ export default class SampleSpace extends React.Component {
             },
             {
                 questionId: '1ColoredBallFrom3',
-                question:
-                    [
-                        "A box has one red, one green and one blue ball.",
-                        "What is the Sample Space of picking up a ball?",
-                    ],
+                question: "A box has one red, one green and one blue ball.\nWhat is the Sample Space of picking up a ball?",
                 answerComment: ["Write 'R' for red, 'G' for green and 'B' for red, separate by ','."],
                 answer: new Set(['R', 'G', 'B']),
             },
             {
                 questionId: '2ColoredBallsFrom3',
-                question:
-                    [
-                        "A box has one red, one green and one blue ball.",
-                        "What is the Sample Space of picking up two balls?",
-                    ],
+                question: "A box has one red, one green and one blue ball.\nWhat is the Sample Space of picking up two balls?",
                 answerComment: [
                         "Write 'BG' to express the outcome of picking one blue and then one green.",
                         "Separate the outcomes by ','."
@@ -64,12 +56,7 @@ export default class SampleSpace extends React.Component {
             },
             {
                 questionId: '2ColoredBallsFrom3PutBack',
-                question:
-                    [
-                        "A box has one red, one green and one blue ball.",
-                        "What is the Sample Space of picking up a ball,",
-                        "put it back and then pick another one up?",
-                    ],
+                question: "A box has one red, one green and one blue ball.\nWhat is the Sample Space of picking up a ball,\nput it back and then pick another one up?",
                 answerComment: [
                         "Write 'BG' to express the outcome of picking one blue and then one green.",
                         "Separate the outcomes by ','."
@@ -122,7 +109,7 @@ export default class SampleSpace extends React.Component {
         return <Exercise 
             title="Find the Sample Space of a random experiment"
             description="Given a random experiment find the space that describes all the possible outcomes."
-            question={this.state.question.map(item => `\\text{${item}}`)}
+            question={this.state.question}
             answerFields={[{type: "text-input"}]}
             answerComment={this.state.answerComment}
             checkAnswer={this.checkAnswer}
