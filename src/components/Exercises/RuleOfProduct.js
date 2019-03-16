@@ -20,10 +20,10 @@ export default class RuleOfProduct extends React.Component {
         const questionList = [
             {
                 questionId: 'theater',
-                question: (randomVariables) => [
-                    `The seats of a theater are numbered by ${randomVariables.numberOfLetters === 1 ? 'a letter' : randomVariables.numberOfLetters + ' letters'} (A-${String.fromCharCode(64+randomVariables.rangeOfLetters)}),`,
-                    `followed by ${randomVariables.numberOfDigits === 1 ? 'a digit' : randomVariables.numberOfDigits + ' digits'}. How many seats can we number that way?`,
-                ],
+                question: (randomVariables) => 
+                    `The seats of a theater are numbered by ${randomVariables.numberOfLetters === 1 ? 'a letter' : randomVariables.numberOfLetters + ' letters'} (A-${String.fromCharCode(64+randomVariables.rangeOfLetters)}),\n
+                    followed by ${randomVariables.numberOfDigits === 1 ? 'a digit' : randomVariables.numberOfDigits + ' digits'}. How many seats can we number that way?`
+                ,
                 randomVariables: [
                     { name: 'rangeOfLetters', type: { min: 3, max: 6, type: 'integer' } },
                     { name: 'numberOfLetters', type: { min: 1, max: 3, type: 'integer' } },
@@ -35,11 +35,11 @@ export default class RuleOfProduct extends React.Component {
             },
             {
                 questionId: 'carPlate',
-                question: (randomVariables) => [
-                    `The car plates of a city are coded by ${randomVariables.numberOfCharacters} characters.`,
-                    `The ${randomVariables.numberOfLetters === 1 ? 'one is letter' : `${randomVariables.numberOfLetters} are letters`} (26 different letters) and the rest are digits.`,
-                    `How many car plates can we number that way?`,
-                ],
+                question: (randomVariables) => 
+                    `The car plates of a city are coded by ${randomVariables.numberOfCharacters} characters.\n
+                    The ${randomVariables.numberOfLetters === 1 ? 'one is letter' : `${randomVariables.numberOfLetters} are letters`} (26 different letters) and the rest are digits.\n
+                    How many car plates can we number that way?`
+                ,
                 randomVariables: [
                     { name: 'numberOfCharacters', type: { min: 4, max: 6, type: 'integer' } },
                     { name: 'numberOfLetters', type: { min: 1, max: 3, type: 'integer' } },
@@ -50,11 +50,11 @@ export default class RuleOfProduct extends React.Component {
             },
             {
                 questionId: 'balls',
-                question: (randomVariables) => [
-                    `A factory can create balls colored in ${randomVariables.numberOfColors} different colors, .`,
-                    `in ${randomVariables.numberOfSizes} different sizes and made of ${randomVariables.numberOfMaterials} different materials.`,
-                    `How many different balls can the factory create?`,
-                ],
+                question: (randomVariables) => 
+                    `A factory can create balls colored in ${randomVariables.numberOfColors} different colors, \n
+                    in ${randomVariables.numberOfSizes} different sizes and made of ${randomVariables.numberOfMaterials} different materials.\n
+                    How many different balls can the factory create?`
+                ,
                 randomVariables: [
                     { name: 'numberOfColors', type: { min: 2, max: 6, type: 'integer' } },
                     { name: 'numberOfSizes', type: { min: 2, max: 4, type: 'integer' } },
@@ -76,7 +76,7 @@ export default class RuleOfProduct extends React.Component {
         this.setState({question: renderedQuestion, answer: newQuestion.answer(randomVariables), questionId: newQuestion.questionId });
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.generateValues();
     }
 
@@ -98,7 +98,7 @@ export default class RuleOfProduct extends React.Component {
         return <Exercise 
             title="Rule of Product"
             description="Find the number of different combinations using the rule of product."
-            question={this.state.question.map(item => `\\text{${item}}`)}
+            question={this.state.question}
             answerFields={[{type: "text-input", id: "answer"}]}
             answerComment={this.state.answerComment}
             checkAnswer={this.checkAnswer}

@@ -72,7 +72,7 @@ export default class SampleSpace extends React.Component {
         this.setState(newQuestion);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.generateValues();
     }
 
